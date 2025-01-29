@@ -1,7 +1,6 @@
 """This function handles the withdrawal process for the user."""
 
-# TODO: Pass in the checking_account and savings_account objects.
-def handle_withdrawal():
+def handle_withdrawal(checking, savings):
     """
     Handles the withdrawal of funds for checking and savings accounts.
 
@@ -18,38 +17,27 @@ def handle_withdrawal():
     If the user enters an invalid choice, the function displays an error message and prompts again.
     """
     print("Which account would you like to make a withdrawal?")
-    # TODO: Prompt the user to select an account to make a withdrawal.
-    # TODO: If the user chooses to quit, return from the function.
-    if:
+    choice = input('1. Checking\n2. Savings\n3. Quit\n')
+    if choice == 3:
         return
 
     try:
-        # TODO: If the selection is in a list of valid choices, i.e ['1', '2']
-        if:
+        if choice in [1,2]:
             try:
-                # TODO: Prompt the user to enter the amount to withdraw and convert it to a float.
-
-            # Use the ValueError as an exception.
-            except ValueError:
-                # TODO: Print an error message if the user enters an invalid amount.
-
-                # TODO: Call the handle_withdrawal function recursively for an invalid amount.
-
-                # TODO: Ensure the function returns after the recursive call.
-
-            # TODO: Add an if/else conditional statement to check the account choice,
-            if:
-                # TODO: Call the withdraw method on the appropriate account.
-                # TODO: Add a print statement to display the updated balance after the deposit
-                # TODO: Format the balance to two decimal places and thousands.
-            else:
-                # TODO: Call the deposit methods on the appropriate account.
-                # TODO: Add a print statement to display the updated balance after the deposit
-                # TODO: Format the balance to two decimal places and thousands.
+                amount = float(input('Withdraw what amount?  '))
+                if choice == 1:
+                    checking.withdraw(amount)
+                elif choice == 2:
+                    savings.withdraw(amount)
+                else:
+                    raise ValueError('Invalid Choice.')
+            except ValueError as e:
+                print('Error: ', e)
+                handle_withdrawal(checking, savings)
+                return
         else:
-            # TODO: Raise a ValueError with a message stating the user entered an invalid choice.
-    # If the user enters an invalid choice,
-    # Print the ValueError message and call the handle_deposit function recursively.
+            raise ValueError('Invalid Choice.')
     except ValueError as e:
         print(e)
         handle_withdrawal(checking, savings)
+        return
